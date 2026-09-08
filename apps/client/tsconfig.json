@@ -1,0 +1,16 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "*.json",
+    "./src/**/*",
+    "./tests/**/*",
+    "./tsdown.config.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}
