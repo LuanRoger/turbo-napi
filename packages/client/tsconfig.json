@@ -4,13 +4,9 @@
     "paths": {
       "~/*": ["./*"],
       "@/*": ["./src/*"]
-    }
+    },
+    "strictNullChecks": true
   },
-  "include": [
-    "*.json",
-    "./src/**/*",
-    "./tests/**/*",
-    "./tsdown.config.ts"
-  ],
+  "include": ["*.json", "./src/**/*", "./tsdown.config.ts"],
   "exclude": ["node_modules", "dist"]
 }

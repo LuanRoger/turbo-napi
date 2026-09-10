@@ -1,28 +1,26 @@
 {
   "name": "@repo/client",
-  "type": "module",
   "version": "1.0.0",
-  "description": "A client for the Rust NAPI core",
   "private": false,
-  "author": "Luan Roger <luanroger.dev@gmail.com> (https://github.com/LuanRoger)",
+  "description": "A client for the Rust NAPI core",
   "license": "MIT",
+  "author": "Luan Roger <luanroger.dev@gmail.com> (https://github.com/LuanRoger)",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "LICENSE",
     "README.md"
   ],
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.mts"
-    }
-  },
   "scripts": {
-    "dev": "tsdown --watch ./src",
     "build": "tsc && tsdown -c tsdown.config.ts",
-    "check": "ultracite check",
-    "fix": "ultracite fix",
+    "dev": "tsdown --watch ./src",
     "test": "vitest run",
     "test:watch": "vitest"
   },
