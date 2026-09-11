@@ -1,0 +1,7 @@
+[package]
+name = "turbo-engine"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+crate-type = ["rlib"]

@@ -1,0 +1,15 @@
+[package]
+name = "turbo-node-binding"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+turbo-engine.workspace = true
+napi.workspace = true
+napi-derive.workspace = true
+
+[build-dependencies]
+napi-build.workspace = true
