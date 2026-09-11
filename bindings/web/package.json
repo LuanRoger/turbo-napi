@@ -1,7 +1,6 @@
 {
-  "name": "@turbo-napi/wasm",
+  "name": "@turbo-napi/web",
   "version": "0.0.1",
-  "private": true,
   "type": "module",
   "files": [
     "pkg"

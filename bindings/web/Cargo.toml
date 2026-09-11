@@ -1,5 +1,5 @@
 [package]
-name = "turbo-wasm-binding"
+name = "turbo-web-binding"
 version.workspace = true
 edition.workspace = true
 
