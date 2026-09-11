@@ -1,4 +1,7 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["ultracite/biome/core", "ultracite/biome/vitest"]
+  "extends": ["ultracite/biome/core", "ultracite/biome/vitest"],
+  "linter": {
+    "includes": ["!crates/*.ts", "!crates/*.js"]
+  }
 }

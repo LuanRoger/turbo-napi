@@ -20,6 +20,7 @@
   ],
   "scripts": {
     "build": "tsc && tsdown -c tsdown.config.ts",
+    "check-types": "tsc --noEmit",
     "dev": "tsdown --watch ./src",
     "test": "vitest run",
     "test:watch": "vitest"
