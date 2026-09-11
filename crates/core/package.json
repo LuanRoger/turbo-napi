@@ -1,0 +1,43 @@
+{
+  "name": "core",
+  "version": "0.0.1",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "repository": {
+    "url": "git+ssh://git@github.com/napi-rs/package-template-pnpm.git",
+    "type": "git"
+  },
+  "files": [
+    "index.d.ts",
+    "index.js"
+  ],
+  "napi": {
+    "binaryName": "core",
+    "targets": [
+      "x86_64-apple-darwin",
+      "x86_64-pc-windows-msvc",
+      "x86_64-unknown-linux-gnu"
+    ]
+  },
+  "engines": {
+    "node": ">= 22.14.0 < 23 || >= 23.6.0"
+  },
+  "scripts": {
+    "artifacts": "napi artifacts",
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "format:rs": "cargo fmt",
+    "prepublishOnly": "napi prepublish -t npm",
+    "version": "napi version"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@emnapi/core": "^2.0.0-alpha.4",
+    "@emnapi/runtime": "^2.0.0-alpha.4",
+    "@napi-rs/cli": "^3.8.6",
+    "@napi-rs/wasm-runtime": "^1.2.3",
+    "@oxc-node/core": "^0.1.0",
+    "emnapi": "^2.0.0-alpha.4",
+    "typescript": "^7.0.2"
+  }
+}

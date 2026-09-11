@@ -2,6 +2,7 @@
   "name": "turbo-napi",
   "private": true,
   "workspaces": [
+    "crates/*",
     "packages/*"
   ],
   "scripts": {

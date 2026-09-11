@@ -1,0 +1,11 @@
+{
+  "extends": "@repo/typescript-config/napi.json",
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "node_modules",
+    "benchmark",
+    "__test__"
+  ]
+}
