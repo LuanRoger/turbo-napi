@@ -1,8 +1,8 @@
 {
-  "name": "@repo/client",
+  "name": "@turbo-napi/sdk",
   "version": "1.0.0",
   "private": false,
-  "description": "A client for the Rust NAPI core",
+  "description": "Public JavaScript SDK for the native and WebAssembly bindings",
   "license": "MIT",
   "author": "Luan Roger <luanroger.dev@gmail.com> (https://github.com/LuanRoger)",
   "type": "module",
@@ -26,7 +26,8 @@
     "test:watch": "vitest"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*",
+    "@turbo-napi/node": "workspace:*",
+    "@packages/typescript-config": "workspace:*",
     "tsdown": "^0.22.9",
     "typescript": "^6.0.3",
     "vitest": "^4.1.10"
