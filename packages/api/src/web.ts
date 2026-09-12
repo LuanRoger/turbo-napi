@@ -1,1 +1,1 @@
-export { add, divide, multiply, subtract } from "@turbo-napi/web";
+export { add, divide, multiply, subtract } from "@bindings/web";

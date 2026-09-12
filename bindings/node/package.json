@@ -1,5 +1,5 @@
 {
-  "name": "@turbo-napi/node",
+  "name": "@bindings/node",
   "version": "0.0.1",
   "repository": {
     "type": "git",

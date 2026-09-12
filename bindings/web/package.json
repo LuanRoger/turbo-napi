@@ -1,5 +1,5 @@
 {
-  "name": "@turbo-napi/web",
+  "name": "@bindings/web",
   "version": "0.0.1",
   "type": "module",
   "exports": {

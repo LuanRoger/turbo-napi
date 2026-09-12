@@ -1,1 +1,1 @@
-export * from "@turbo-napi/node";
+export * from "@bindings/node";

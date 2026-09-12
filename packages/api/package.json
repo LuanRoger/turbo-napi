@@ -1,5 +1,5 @@
 {
-  "name": "@turbo-napi/api",
+  "name": "@packages/api",
   "version": "0.0.1",
   "private": false,
   "description": "Environment-neutral API backed by native Node.js or WebAssembly bindings",
@@ -31,8 +31,8 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@turbo-napi/node": "workspace:*",
-    "@turbo-napi/web": "workspace:*"
+    "@bindings/node": "workspace:*",
+    "@bindings/web": "workspace:*"
   },
   "devDependencies": {
     "@packages/typescript-config": "workspace:*",
