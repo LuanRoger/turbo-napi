@@ -2,6 +2,9 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["ultracite/biome/core", "ultracite/biome/vitest"],
   "linter": {
-    "includes": ["!crates/*.ts", "!crates/*.js"]
+    "includes": ["!bindings/node/*.ts", "!bindings/node/*.js"]
+  },
+  "formatter": {
+    "includes": ["!bindings/node/*.ts", "!bindings/node/*.js"]
   }
 }

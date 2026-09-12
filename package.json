@@ -13,8 +13,8 @@
     "check": "ultracite check",
     "check-types": "turbo run check-types",
     "dev": "turbo run dev",
-    "fix": "ultracite fix",
-    "lint": "turbo run lint",
+    "fix": "ultracite fix && turbo run fix",
+    "test": "turbo run test",
     "test:rust": "cargo test -p turbo-engine"
   },
   "devDependencies": {

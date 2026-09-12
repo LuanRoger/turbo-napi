@@ -15,9 +15,9 @@
     "artifacts": "napi artifacts",
     "build": "napi build --platform --release",
     "build:debug": "napi build --platform",
-    "format:rs": "cargo fmt",
-    "prepublishOnly": "napi prepublish -t npm",
-    "version": "napi version"
+    "fix": "cargo fmt",
+    "napi": "napi",
+    "prepublishOnly": "napi prepublish -t npm"
   },
   "devDependencies": {
     "@napi-rs/cli": "^3.8.6",
