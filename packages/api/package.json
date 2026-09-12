@@ -1,0 +1,44 @@
+{
+  "name": "@turbo-napi/api",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Environment-neutral API backed by native Node.js or WebAssembly bindings",
+  "license": "MIT",
+  "author": "Luan Roger <luanroger.dev@gmail.com> (https://github.com/LuanRoger)",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/web.d.mts",
+      "node": "./dist/node.mjs",
+      "browser": "./dist/web.mjs",
+      "default": "./dist/web.mjs"
+    },
+    "./node": {
+      "types": "./dist/node.d.mts",
+      "import": "./dist/node.mjs"
+    },
+    "./web": {
+      "types": "./dist/web.d.mts",
+      "import": "./dist/web.mjs"
+    }
+  },
+  "types": "./dist/web.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc --noEmit && tsdown -c tsdown.config.ts",
+    "check-types": "tsc --noEmit",
+    "dev": "tsdown --watch -c tsdown.config.ts"
+  },
+  "dependencies": {
+    "@turbo-napi/node": "workspace:*",
+    "@turbo-napi/web": "workspace:*"
+  },
+  "devDependencies": {
+    "@packages/typescript-config": "workspace:*",
+    "rolldown-plugin-wasm": "^0.3.2",
+    "tsdown": "^0.22.9",
+    "typescript": "^6.0.3"
+  }
+}
