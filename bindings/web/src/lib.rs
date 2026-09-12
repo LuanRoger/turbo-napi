@@ -1,7 +1,14 @@
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: &str);
+}
+
+#[wasm_bindgen]
 pub fn add(left: f64, right: f64) -> f64 {
+    log("add called");
     turbo_engine::add(left, right)
 }
 
