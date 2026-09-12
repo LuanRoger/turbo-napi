@@ -17,7 +17,9 @@ crates/engine       Pure Rust logic
 - `bindings/node` exposes the engine through N-API.
 - `bindings/web` exposes the engine through `wasm32-unknown-unknown`.
 - `packages/api` provides one TypeScript interface and selects the binding through package export conditions.
-- `examples/react-wasm` demonstrates browser consumption without importing a binding directly.
+- `packages/typescript-config` provides shared TypeScript presets for libraries, Node.js, browsers, and React.
+- `apps/react-wasm` demonstrates browser consumption without importing a binding directly.
+- `apps/server` demonstrates native Node.js consumption.
 
 ## Requirements
 
@@ -62,34 +64,60 @@ pnpm test:rust
 
 ## Common API
 
-Both Node.js and browser consumers use the same asynchronous factory. The factory is asynchronous because WebAssembly must be initialized before its exports can be called.
+Node.js and browser consumers use the same function interface:
 
 ```ts
-import { createMathApi } from '@turbo-napi/api'
+import { add, divide, multiply, subtract } from "@turbo-napi/api";
 
-const math = await createMathApi()
-
-math.add(8, 2)
-math.subtract(8, 2)
-math.multiply(8, 2)
-math.divide(8, 2)
+add(8, 2);
+subtract(8, 2);
+multiply(8, 2);
+divide(8, 2);
 ```
 
 Node.js resolves the `node` export condition to the native addon. Browser bundlers resolve `browser`, or fall back to the WebAssembly implementation through `default`.
 
-Explicit environment entry points are also available:
+Explicit environment entry points are also available when an application should not depend on conditional export resolution:
+
+For a Node.js application:
 
 ```ts
-import { createMathApi } from '@turbo-napi/api/node'
-import { createMathApi } from '@turbo-napi/api/web'
+import { add } from "@turbo-napi/api/node";
 ```
+
+For a browser application:
+
+```ts
+import { add } from "@turbo-napi/api/web";
+```
+
+## TypeScript configuration
+
+Every TypeScript project extends a preset from `@packages/typescript-config`:
+
+- `base.json` contains strict, environment-neutral correctness rules.
+- `library.json` configures ESM libraries built by a bundler.
+- `browser.json` adds DOM, Vite, and arbitrary-extension support.
+- `react.json` extends the browser preset with React JSX.
+- `node.json` configures NodeNext modules and Node.js globals.
+
+New projects should extend the most specific preset and keep only project-local settings in their own `tsconfig.json`:
+
+```json
+{
+  "extends": "@packages/typescript-config/node.json",
+  "include": ["src"]
+}
+```
+
+Add `@packages/typescript-config` as a `workspace:*` development dependency in every package that extends a preset.
 
 ## Adding shared behavior
 
 1. Implement and test the operation in `crates/engine/src/lib.rs`.
 2. Add a thin N-API wrapper in `bindings/node/src/lib.rs`.
 3. Add a thin wasm-bindgen wrapper in `bindings/web/src/lib.rs`.
-4. Add the operation to `MathApi` and both binding objects in `packages/api/src`.
+4. Re-export the operation from the Node and web entries in `packages/api/src`.
 5. Run `pnpm build` and `pnpm test:rust`.
 
 Keep JavaScript value conversion and runtime-specific behavior in the adapters. The engine should remain usable as an ordinary Rust library.

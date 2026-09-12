@@ -1,17 +1,11 @@
 {
-  "extends": "@packages/typescript-config/base.json",
-  "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "allowArbitraryExtensions": true,
-    "paths": {
-      "~/*": ["./*"],
-      "@/*": ["./src/*"]
-    },
-    "strictNullChecks": true
-  },
-  "include": ["*.json", "./src/**/*", "./tsdown.config.ts"],
-  "exclude": ["node_modules", "dist"]
+  "extends": "@packages/typescript-config/library.json",
+  "include": [
+    "src",
+    "tsdown.config.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
 }

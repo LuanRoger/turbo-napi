@@ -4,7 +4,7 @@
   "workspaces": [
     "crates/*",
     "packages/*",
-    "examples/*"
+    "apps/*"
   ],
   "scripts": {
     "build": "turbo run build",

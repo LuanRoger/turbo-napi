@@ -1,5 +1,19 @@
 {
   "name": "@packages/typescript-config",
   "version": "0.0.0",
-  "private": true
+  "private": true,
+  "exports": {
+    "./base.json": "./base.json",
+    "./browser.json": "./browser.json",
+    "./library.json": "./library.json",
+    "./node.json": "./node.json",
+    "./react.json": "./react.json"
+  },
+  "files": [
+    "base.json",
+    "browser.json",
+    "library.json",
+    "node.json",
+    "react.json"
+  ]
 }

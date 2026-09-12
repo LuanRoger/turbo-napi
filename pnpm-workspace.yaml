@@ -1,6 +1,6 @@
 packages:
   - "bindings/*"
-  - "examples/*"
+  - "apps/*"
   - "packages/*"
 allowBuilds:
   lefthook: true
