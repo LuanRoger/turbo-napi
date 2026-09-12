@@ -1,159 +1,105 @@
-# Turborepo starter
+# Rust Node + WebAssembly monorepo template
 
-This Turborepo starter is maintained by the Turborepo core team.
+This template keeps application logic in Rust and exposes it to both Node.js and browsers without coupling the shared implementation to either JavaScript ABI.
 
-## Using this example
+## Architecture
 
-Run the following command:
-
-```sh
-npx create-turbo@latest
+```text
+crates/engine       Pure Rust logic
+      │
+      ├── bindings/node    napi-rs adapter → @turbo-napi/node
+      └── bindings/web     wasm-bindgen adapter → @turbo-napi/web
+                    │
+              packages/api                → @turbo-napi/api
 ```
 
-## What's inside?
+- `crates/engine` contains platform-neutral Rust and its unit tests.
+- `bindings/node` exposes the engine through N-API.
+- `bindings/web` exposes the engine through `wasm32-unknown-unknown`.
+- `packages/api` provides one TypeScript interface and selects the binding through package export conditions.
+- `examples/react-wasm` demonstrates browser consumption without importing a binding directly.
 
-This Turborepo includes the following packages/apps:
+## Requirements
 
-### Apps and Packages
+- Node.js and pnpm versions from the root `package.json`
+- A stable Rust toolchain
+- `wasm-pack`
+- The `wasm32-unknown-unknown` Rust target
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `@next/eslint-plugin-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+Install the Rust tooling once:
 
 ```sh
-cd my-turborepo
-turbo build
+rustup target add wasm32-unknown-unknown
+cargo install wasm-pack
 ```
 
-Without global `turbo`, use your package manager:
+Install JavaScript dependencies:
 
 ```sh
-cd my-turborepo
-npx turbo build
-pnpm exec turbo build
-pnpm exec turbo build
+pnpm install
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+## Build
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+Build the complete workspace:
 
 ```sh
-turbo build --filter=docs
+pnpm build
 ```
 
-Without global `turbo`:
+Or build bindings independently:
 
 ```sh
-npx turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+pnpm build:node
+pnpm build:web
 ```
 
-### Develop
-
-To develop all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+Run the Rust tests:
 
 ```sh
-cd my-turborepo
-turbo dev
+pnpm test:rust
 ```
 
-Without global `turbo`, use your package manager:
+## Common API
 
-```sh
-cd my-turborepo
-npx turbo dev
-pnpm exec turbo dev
-pnpm exec turbo dev
+Both Node.js and browser consumers use the same asynchronous factory. The factory is asynchronous because WebAssembly must be initialized before its exports can be called.
+
+```ts
+import { createMathApi } from '@turbo-napi/api'
+
+const math = await createMathApi()
+
+math.add(8, 2)
+math.subtract(8, 2)
+math.multiply(8, 2)
+math.divide(8, 2)
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+Node.js resolves the `node` export condition to the native addon. Browser bundlers resolve `browser`, or fall back to the WebAssembly implementation through `default`.
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+Explicit environment entry points are also available:
 
-```sh
-turbo dev --filter=web
+```ts
+import { createMathApi } from '@turbo-napi/api/node'
+import { createMathApi } from '@turbo-napi/api/web'
 ```
 
-Without global `turbo`:
+## Adding shared behavior
 
-```sh
-npx turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+1. Implement and test the operation in `crates/engine/src/lib.rs`.
+2. Add a thin N-API wrapper in `bindings/node/src/lib.rs`.
+3. Add a thin wasm-bindgen wrapper in `bindings/web/src/lib.rs`.
+4. Add the operation to `MathApi` and both binding objects in `packages/api/src`.
+5. Run `pnpm build` and `pnpm test:rust`.
 
-### Remote Caching
+Keep JavaScript value conversion and runtime-specific behavior in the adapters. The engine should remain usable as an ordinary Rust library.
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+## Rename for a new project
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+When using this repository as a template, replace:
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+- the `@turbo-napi/*` npm scope
+- the `turbo-*` Cargo package prefix
+- repository, author, and package metadata
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-pnpm exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-pnpm exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+The directory names describe architectural roles and normally do not need to change.

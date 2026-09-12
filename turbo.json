@@ -13,7 +13,12 @@
       "outputs": [
         ".next/**",
         "!.next/cache/**",
-        "!.next/dev/**"
+        "!.next/dev/**",
+        "dist/**",
+        "pkg/**",
+        "*.node",
+        "index.d.ts",
+        "index.js"
       ]
     },
     "check-types": {

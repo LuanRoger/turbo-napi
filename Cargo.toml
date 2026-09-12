@@ -1,8 +1,8 @@
 [workspace]
 members = [
+  "bindings/node",
+  "bindings/web",
   "crates/engine",
-  "crates/node-binding",
-  "crates/wasm-binding",
 ]
 resolver = "2"
 

@@ -1,5 +1,6 @@
 packages:
-  - "crates/*"
+  - "bindings/*"
+  - "examples/*"
   - "packages/*"
 allowBuilds:
   lefthook: true

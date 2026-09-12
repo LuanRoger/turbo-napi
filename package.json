@@ -8,11 +8,14 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "build:node": "pnpm --filter @turbo-napi/node build",
+    "build:web": "pnpm --filter @turbo-napi/web build",
     "check": "ultracite check",
     "check-types": "turbo run check-types",
     "dev": "turbo run dev",
     "fix": "ultracite fix",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "test:rust": "cargo test -p turbo-engine"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.12",
