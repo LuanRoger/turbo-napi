@@ -1,0 +1,6 @@
+{
+  "extends": "@packages/typescript-config/node.json",
+  "include": [
+    "src"
+  ]
+}

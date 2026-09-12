@@ -1,0 +1,29 @@
+{
+  "name": "react",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b && vite build",
+    "check-types": "tsc --noEmit",
+    "dev": "vite",
+    "start": "vite preview"
+  },
+  "dependencies": {
+    "@packages/api": "workspace:*",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@packages/typescript-config": "workspace:*",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "globals": "^17.12.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.69.0",
+    "vite": "^8.3.0"
+  }
+}

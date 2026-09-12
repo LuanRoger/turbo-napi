@@ -21,7 +21,25 @@ importers:
         specifier: 7.11.1
         version: 7.11.1(@biomejs/biome@2.5.12)(eslint@10.10.0)
 
-  apps/react-wasm:
+  apps/node:
+    devDependencies:
+      '@oxc-node/cli':
+        specifier: ^0.1.0
+        version: 0.1.0
+      '@packages/api':
+        specifier: workspace:*
+        version: link:../../packages/api
+      '@packages/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
+      '@types/node':
+        specifier: ^24.13.3
+        version: 24.13.4
+      typescript:
+        specifier: ^7.0.2
+        version: 7.0.2
+
+  apps/react:
     dependencies:
       '@packages/api':
         specifier: workspace:*
@@ -63,24 +81,6 @@ importers:
       vite:
         specifier: ^8.3.0
         version: 8.3.0(@types/node@24.13.4)(yaml@2.9.0)
-
-  apps/server:
-    devDependencies:
-      '@oxc-node/cli':
-        specifier: ^0.1.0
-        version: 0.1.0
-      '@packages/api':
-        specifier: workspace:*
-        version: link:../../packages/api
-      '@packages/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
-      '@types/node':
-        specifier: ^24.13.3
-        version: 24.13.4
-      typescript:
-        specifier: ^7.0.2
-        version: 7.0.2
 
   bindings/node:
     devDependencies:
