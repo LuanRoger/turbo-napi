@@ -8,8 +8,8 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "build:node": "pnpm --filter @turbo-napi/node build",
-    "build:web": "pnpm --filter @turbo-napi/web build",
+    "build:api": "turbo run build --filter @packages/api",
+    "build:bindings": "turbo run build --filter @bindings/node --filter @bindings/web",
     "check": "ultracite check",
     "check-types": "turbo run check-types",
     "dev": "turbo run dev",
