@@ -699,7 +699,4 @@ if (!nativeBinding) {
 }
 
 module.exports = nativeBinding
-module.exports.add = nativeBinding.add
-module.exports.divide = nativeBinding.divide
-module.exports.multiply = nativeBinding.multiply
-module.exports.subtract = nativeBinding.subtract
+module.exports.fib = nativeBinding.fib

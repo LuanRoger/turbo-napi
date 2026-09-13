@@ -1,1 +1,1 @@
-export * from "@bindings/node";
+export { fib } from "@bindings/node";

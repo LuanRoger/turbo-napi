@@ -1,1 +1,1 @@
-export { add, divide, multiply, subtract } from "@bindings/web";
+export { fib } from "@bindings/web";

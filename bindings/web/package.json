@@ -12,7 +12,7 @@
     "pkg"
   ],
   "scripts": {
-    "build": "wasm-pack build --target bundler --release --out-dir pkg --out-name turbo_napi_wasm",
-    "build:debug": "wasm-pack build --target bundler --dev --out-dir pkg --out-name turbo_napi_wasm"
+    "build": "wasm-pack build --release --out-dir pkg --out-name turbo_napi_wasm",
+    "build:debug": "wasm-pack build --dev --out-dir pkg --out-name turbo_napi_wasm"
   }
 }
