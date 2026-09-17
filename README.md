@@ -2,25 +2,6 @@
 
 This template keeps application logic in Rust and exposes it to both Node.js and browsers without coupling the shared implementation to either JavaScript ABI.
 
-## Architecture
-
-```text
-crates/engine       Pure Rust logic
-      │
-      ├── bindings/node    napi-rs adapter → @turbo-napi/node
-      └── bindings/web     wasm-bindgen adapter → @turbo-napi/web
-                    │
-              packages/api                → @turbo-napi/api
-```
-
-- `crates/engine` contains platform-neutral Rust and its unit tests.
-- `bindings/node` exposes the engine through N-API.
-- `bindings/web` exposes the engine through `wasm32-unknown-unknown`.
-- `packages/api` provides one TypeScript interface and selects the binding through package export conditions.
-- `packages/typescript-config` provides shared TypeScript presets for libraries, Node.js, browsers, and React.
-- `apps/react-wasm` demonstrates browser consumption without importing a binding directly.
-- `apps/server` demonstrates native Node.js consumption.
-
 ## Requirements
 
 - Node.js and pnpm versions from the root `package.json`
