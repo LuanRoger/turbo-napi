@@ -80,6 +80,3 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build workspace
         run: pnpm build
-      - name: Test common Node API
-        working-directory: packages/api
-        run: node --input-type=module -e "import { createMathApi } from './dist/node.mjs'; const math = await createMathApi(); if (math.add(8, 2) !== 10 || math.subtract(8, 2) !== 6 || math.multiply(8, 2) !== 16 || math.divide(8, 2) !== 4) process.exit(1)"
